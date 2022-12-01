@@ -1,0 +1,5 @@
+advent-of-code-data==1.1.1
+numpy
+pytest
+parse
+sympy
