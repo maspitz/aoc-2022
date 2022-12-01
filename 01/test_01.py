@@ -3,9 +3,22 @@
 import day01
 
 # Test data given as a multiline string.
-sample_input_data = """Sample data not entered"""
+sample_input_data = """1000
+2000
+3000
 
-sample_solution_a = "Sample solution not entered"
+4000
+
+5000
+6000
+
+7000
+8000
+9000
+
+10000"""
+
+sample_solution_a = "24000"
 
 sample_solution_b = "Sample solution not entered"
 
