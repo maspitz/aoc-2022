@@ -2,19 +2,30 @@
 
 from aocd.models import Puzzle
 
-def part_a(input_data: str) -> int:
-    """Given the puzzle input data, return the solution for part A."""
+
+def calorie_totals(input_data: str) -> list:
+    """Given puzzle input data, return a list of of each elf's total calories."""
 
     elves_food = input_data.split("\n\n")
     calorie_totals = [sum(int(calories) for calories in elf_food.split("\n"))
                           for elf_food in elves_food]
-    return max(calorie_totals)
+    return calorie_totals
+
+
+def part_a(input_data: str) -> int:
+    """Given the puzzle input data, return the solution for part A."""
+
+    return max(calorie_totals(input_data))
 
 
 def part_b(input_data: str) -> int:
     """Given the puzzle input data, return the solution for part B."""
 
-    return "Solution not implemented"
+    cal_totals = calorie_totals(input_data)
+
+    top_three_totals = sorted(cal_totals)[-3:]
+
+    return sum(top_three_totals)
 
 
 if __name__ == '__main__':
