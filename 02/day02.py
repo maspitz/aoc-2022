@@ -33,7 +33,33 @@ def round_score_a(input_line: str) -> int:
         score += 3
 
     return score
-    
+
+
+def round_score_b(input_line: str) -> int:
+    """Calculate the score for one round in part b."""
+
+    victory_code = input_line[2]
+
+    # This time, determine winning and losing shapes using modular arithmetic.
+
+    opponent_shape = SHAPE_CODE[input_line[0]]
+    if victory_code == "X":
+        # player must lose
+        score = 0
+        player_shape = ((opponent_shape - 2) % 3) + 1
+    elif victory_code == "Y":
+        # player must draw
+        score = 3
+        player_shape = opponent_shape
+    elif victory_code == "Z":
+        # player must win
+        score = 6
+        player_shape = ((opponent_shape) % 3) + 1
+
+    score += player_shape
+
+    return score
+
 
 def part_a(input_data: str) -> int:
     """Given the puzzle input data, return the solution for part A."""
@@ -44,7 +70,7 @@ def part_a(input_data: str) -> int:
 def part_b(input_data: str) -> int:
     """Given the puzzle input data, return the solution for part B."""
 
-    return "Solution not implemented"
+    return sum(round_score_b(line) for line in input_data.split("\n"))
 
 
 if __name__ == '__main__':
