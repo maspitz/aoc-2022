@@ -3,9 +3,11 @@
 import day02
 
 # Test data given as a multiline string.
-sample_input_data = """Sample data not entered"""
+sample_input_data = """A Y
+B X
+C Z"""
 
-sample_solution_a = "Sample solution not entered"
+sample_solution_a = 15
 
 sample_solution_b = "Sample solution not entered"
 
