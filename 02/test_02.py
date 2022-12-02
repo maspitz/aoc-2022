@@ -9,7 +9,7 @@ C Z"""
 
 sample_solution_a = 15
 
-sample_solution_b = "Sample solution not entered"
+sample_solution_b = 12
 
 
 def test_part_a():
