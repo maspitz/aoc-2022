@@ -41,6 +41,30 @@ def rucksack_error_priority(rucksack: str):
     return item_priority(item)
 
 
+def partition_by_n(full: list, n: int) -> list:
+    """Returns the input partitioned into sublists of length n.
+
+    The input length is required to be divisible by n."""
+
+    if len(full) % n != 0:
+        raise ValueError("Input length not divisible by %{n}.")
+
+    return [full[i:i+n] for i in range(0, len(full), n)]
+
+
+def group_badge(elf_group: list) -> str:
+    """Determines the badge of an elf group."""
+
+    common_items = set.intersection(*(set(rucksack) for rucksack in elf_group))
+
+    if len(common_items) == 0:
+        raise ValueError("Elf group has no common items")
+    if len(common_items) > 1:
+        raise ValueError("Elf group has more than one common item")
+    (badge,) = common_items
+    return badge
+
+
 def part_a(input_data: str) -> int:
     """Given the puzzle input data, return the solution for part A."""
 
@@ -51,7 +75,10 @@ def part_a(input_data: str) -> int:
 def part_b(input_data: str) -> int:
     """Given the puzzle input data, return the solution for part B."""
 
-    return "Solution not implemented"
+    elf_groups = partition_by_n(input_data.split('\n'), 3)
+
+    return sum(item_priority(group_badge(elf_group))
+               for elf_group in elf_groups)
 
 
 if __name__ == '__main__':
