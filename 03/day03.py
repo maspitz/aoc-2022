@@ -3,19 +3,18 @@
 from aocd.models import Puzzle
 
 
-def common_elements(s1: str, s2: str) -> set:
-    """Given two input strings, return a set of the elements common to both."""
-
-    return set(s1).intersection(set(s2))
+def common_elements(str_list: list) -> set:
+    """Given a list of input strings, return a set of their common elements."""
+    return set.intersection(*[set(item) for item in str_list])
 
 
 def compartments(rucksack: str) -> tuple:
-    """Given a rucksack, returns its two compartments as a tuple."""
+    """Given a rucksack, returns its two compartments as a list."""
 
     n = len(rucksack)
     if n % 2 != 0:
         raise ValueError("Rucksack can't be divided into two equal parts.")
-    return rucksack[:n//2], rucksack[n//2:]
+    return [rucksack[:n//2], rucksack[n//2:]]
 
 
 def item_priority(item: str) -> int:
@@ -33,12 +32,13 @@ def item_priority(item: str) -> int:
 def rucksack_error_priority(rucksack: str):
     """Returns the priority of the misplaced item type in a rucksack."""
 
-    misplaced_items = common_elements(*compartments(rucksack))
+    misplaced_items = common_elements(compartments(rucksack))
     if len(misplaced_items) == 0:
         raise ValueError("Rucksack has no misplaced items.")
     if len(misplaced_items) > 1:
         raise ValueError("Rucksack has more than one misplaced item.")
-    return sum(item_priority(item) for item in misplaced_items)
+    (item,) = misplaced_items
+    return item_priority(item)
 
 
 def part_a(input_data: str) -> int:
