@@ -39,7 +39,15 @@ def part_a(input_data: str) -> int:
 def part_b(input_data: str) -> int:
     """Given the puzzle input data, return the solution for part B."""
 
-    return "Solution not implemented"
+    assignments = [parse_assignment_pair(line)
+                   for line in input_data.split('\n')]
+
+    overlapping = sum(not (b_hi < a_lo or a_hi < b_lo)
+                      for ((a_lo, a_hi), (b_lo, b_hi)) in assignments)
+    overlapping = sum((b_hi >= a_lo and b_lo <= a_hi)
+                      for ((a_lo, a_hi), (b_lo, b_hi)) in assignments)
+
+    return overlapping
 
 
 if __name__ == '__main__':
