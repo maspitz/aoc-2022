@@ -12,7 +12,7 @@ sample_input_data = """2-4,6-8
 
 sample_solution_a = 2
 
-sample_solution_b = "Sample solution not entered"
+sample_solution_b = 4
 
 
 def test_part_a():
