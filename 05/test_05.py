@@ -3,9 +3,17 @@
 import day05
 
 # Test data given as a multiline string.
-sample_input_data = """Sample data not entered"""
+sample_input_data = """    [D]
+[N] [C]
+[Z] [M] [P]
+ 1   2   3
 
-sample_solution_a = "Sample solution not entered"
+move 1 from 2 to 1
+move 3 from 1 to 3
+move 2 from 2 to 1
+move 1 from 1 to 2"""
+
+sample_solution_a = "CMZ"
 
 sample_solution_b = "Sample solution not entered"
 
