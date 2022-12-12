@@ -15,7 +15,7 @@ move 1 from 1 to 2"""
 
 sample_solution_a = "CMZ"
 
-sample_solution_b = "Sample solution not entered"
+sample_solution_b = "MCD"
 
 
 def test_part_a():
