@@ -4,25 +4,36 @@ from aocd.models import Puzzle
 
 from collections import deque
 
-def part_a(input_data: str) -> int:
-    """Given the puzzle input data, return the solution for part A."""
 
-    if len(input_data) < 4:
-        raise ValueError("Input data is less than four characters long.")
+def find_marker(input_data: str, marker_len: int) -> int:
+    """Returns a marker index for the input_data.
 
-    marker = deque(input_data[:3])
-    marker_pos = 3
-    for ch in input_data[3:]:
+    To be more specific, the 'marker index' is the index
+    of the character that immediately follows the marker, where
+    the marker is defined as the first substring of input_data
+    which consists of marker_len distinct characters."""
+
+    if len(input_data) < marker_len:
+        raise ValueError(f"Input data is less than {marker_len} characters long.")
+
+    marker = deque(input_data[:marker_len-1])
+    marker_pos = marker_len-1
+    for ch in input_data[marker_len-1:]:
         marker.append(ch)
         marker_pos += 1
-        if len(set(marker)) == 4:
+        if len(set(marker)) == marker_len:
             return marker_pos
         else:
             marker.popleft()
-    raise ValueError("Input data has no sequence of four consecutive "
+    raise ValueError(f"Input data has no sequence of {marker_len} consecutive "
                      "unique characters.")
     return None
 
+
+def part_a(input_data: str) -> int:
+    """Given the puzzle input data, return the solution for part A."""
+
+    return find_marker(input_data, 4)
 
 def part_b(input_data: str) -> int:
     """Given the puzzle input data, return the solution for part B."""
