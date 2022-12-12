@@ -38,7 +38,7 @@ def part_a(input_data: str) -> int:
 def part_b(input_data: str) -> int:
     """Given the puzzle input data, return the solution for part B."""
 
-    return "Solution not implemented"
+    return find_marker(input_data, 14)
 
 
 if __name__ == '__main__':
