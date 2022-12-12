@@ -11,7 +11,7 @@ sample_input_data = ["mjqjpqmgbljsphdztnvjfqwrcgsmlb",
 
 sample_solution_a = [7, 5, 6, 10, 11]
 
-sample_solution_b = "Sample solution not entered"
+sample_solution_b = [19, 23, 23, 29, 26]
 
 
 def test_part_a():
@@ -22,4 +22,5 @@ def test_part_a():
 
 def test_part_b():
     """Test the solution on sample data for part B."""
-    assert day06.part_b(sample_input_data) == sample_solution_b
+    for data, soln in zip(sample_input_data, sample_solution_b):
+        assert day06.part_b(data) == soln
