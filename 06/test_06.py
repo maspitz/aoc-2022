@@ -16,7 +16,8 @@ sample_solution_b = "Sample solution not entered"
 
 def test_part_a():
     """Test the solution on sample data for part A."""
-    assert day06.part_a(sample_input_data) == sample_solution_a
+    for data, soln in zip(sample_input_data, sample_solution_a):
+        assert day06.part_a(data) == soln
 
 
 def test_part_b():
