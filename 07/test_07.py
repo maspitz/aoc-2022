@@ -3,7 +3,7 @@
 import day07
 
 # Test data given as a multiline string.
-sample_input_data = "$ cd /
+sample_input_data = """$ cd /
 $ ls
 dir a
 14848514 b.txt
