@@ -74,18 +74,24 @@ def subdir_sizes(directory: dict) -> dict:
         elif isinstance(val, dict):
             sub_sizes = subdir_sizes(val)
             dir_sizes.extend(sub_sizes)
-            dir_size += sum(sub_sizes)
+            dir_size += max(sub_sizes)
     dir_sizes.append(dir_size)
     return dir_sizes
 
-def part_a(input_data: str) -> int:
-    """Given the puzzle input data, return the solution for part A."""
+
+def split_history(input_data: str) -> str:
+    """Splits the command history into multiline entries based on the command prompt '\n$ '"""
 
     commands = input_data.split('\n$ ')
     if commands[0][0:2] == '$ ':
         commands[0] = commands[0][2:]
-    rootdir = process_commands(commands)
+    return commands
 
+
+def part_a(input_data: str) -> int:
+    """Given the puzzle input data, return the solution for part A."""
+
+    rootdir = process_commands(split_history(input_data))
     sizes = subdir_sizes(rootdir)
     return sum(size for size in sizes if size <= 100000)
 
@@ -93,7 +99,16 @@ def part_a(input_data: str) -> int:
 def part_b(input_data: str) -> int:
     """Given the puzzle input data, return the solution for part B."""
 
-    return "Solution not implemented"
+    rootdir = process_commands(split_history(input_data))
+    sizes = subdir_sizes(rootdir)
+    TOTAL_SPACE = 70000000
+    UPDATE_SIZE = 30000000
+    used_space = max(sizes)
+    unused_space = TOTAL_SPACE - used_space
+    additional_space_needed = UPDATE_SIZE - unused_space
+
+    return min(size for size in sizes if size >= additional_space_needed)
+
 
 if __name__ == '__main__':
     puzzle = Puzzle(year=2022, day=7)
