@@ -39,12 +39,14 @@ def process_commands(commands: list) -> dict:
 
     for command_history in commands:
         lines = command_history.split('\n')
-        command, argument = lines[0].split(' ')
+        argv = lines[0].split(' ')
         command_output = lines[1:]
+        command = argv[0]
         if command == 'ls':
             for entry in command_output:
                 add_entry(current_dir, entry)
         elif command == 'cd':
+            argument = argv[1]
             if argument == '/':
                 current_dir = rootdir
             else:
@@ -56,10 +58,16 @@ def process_commands(commands: list) -> dict:
                 current_dir = current_dir[argument]
                 if current_dir == None:
                     raise ValueError("Can't cd to parent of root directory.")
+    return rootdir
 
 
 def part_a(input_data: str) -> int:
     """Given the puzzle input data, return the solution for part A."""
+
+    commands = input_data.split('\n$ ')
+    if commands[0][0:2] == '$ ':
+        commands[0] = commands[0][2:]
+    rootdir = process_commands(commands)
 
     return "Solution not implemented"
 
