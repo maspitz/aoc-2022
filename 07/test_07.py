@@ -29,7 +29,7 @@ $ ls
 
 sample_solution_a = 95437
 
-sample_solution_b = "Sample solution not entered"
+sample_solution_b = 24933642
 
 
 def test_part_a():
