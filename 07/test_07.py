@@ -31,6 +31,28 @@ sample_solution_a = 95437
 
 sample_solution_b = "Sample solution not entered"
 
+def test_fs_filesize():
+    """Test the calculation of file sizes in the root directory."""
+
+    rootdir = day07.Directory('rootfs', None, {})
+    rootdir.create_file('size_17', 17)
+    assert rootdir.total_size == 17
+    rootdir.create_file('size_23', 23)
+    assert rootdir.total_size == 40
+    rootdir.create_file('size_23', 1)
+    assert rootdir.total_size == 40
+
+def test_fs_subdirsize():
+    """Test the calculation of file sizes in subdirectories."""
+
+    rootdir = day07.Directory('rootfs', None, {})
+    rootdir.create_file('size_17', 17)
+    assert rootdir.total_size == 17
+    rootdir.create_file('size_23', 23)
+    assert rootdir.total_size == 40
+    rootdir.create_file('size_23', 1)
+    assert rootdir.total_size == 40
+
 
 def test_part_a():
     """Test the solution on sample data for part A."""
