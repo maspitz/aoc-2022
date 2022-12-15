@@ -61,6 +61,23 @@ def process_commands(commands: list) -> dict:
     return rootdir
 
 
+def subdir_sizes(directory: dict) -> dict:
+    """Returns a flat list containing the total sizes of the directory and its subdirectories."""
+
+    dir_sizes = []
+    dir_size = 0
+    for name, val in directory.items():
+        if name == '..':
+            continue
+        if isinstance(val, int):
+            dir_size += val
+        elif isinstance(val, dict):
+            sub_sizes = subdir_sizes(val)
+            dir_sizes.extend(sub_sizes)
+            dir_size += sum(sub_sizes)
+    dir_sizes.append(dir_size)
+    return dir_sizes
+
 def part_a(input_data: str) -> int:
     """Given the puzzle input data, return the solution for part A."""
 
@@ -69,7 +86,8 @@ def part_a(input_data: str) -> int:
         commands[0] = commands[0][2:]
     rootdir = process_commands(commands)
 
-    return "Solution not implemented"
+    sizes = subdir_sizes(rootdir)
+    return sum(size for size in sizes if size <= 100000)
 
 
 def part_b(input_data: str) -> int:
