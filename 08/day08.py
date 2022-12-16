@@ -44,10 +44,48 @@ def part_a(input_data: str) -> int:
     return np.sum(visible_trees)
 
 
+def scenic_distance(height_slice: np.array) -> int:
+    """Returns the distance to the nearest blocking tree.
+
+    The input is a 1-d np.array of tree heights.
+    The nearest blocking tree is the first tree of height greater
+    than or equal to the zeroth tree."""
+
+    if len(height_slice) < 2:
+        return 0
+    height = height_slice[0]
+    for dist, tree in enumerate(height_slice[1:]):
+        if tree >= height:
+            return dist + 1
+    return len(height_slice) - 1
+
+
+def scenic_score(i: int, j: int, tree_heights: np.array) -> int:
+    """Returns the scenic score for the tree at (i,j)."""
+
+    height = tree_heights[i,j]
+    to_right = tree_heights[i,j:]
+    to_left = tree_heights[i,j::-1]
+    to_bottom = tree_heights[i:,j]
+    to_top = tree_heights[i::-1,j]
+    return (scenic_distance(to_right) *
+            scenic_distance(to_left) *
+            scenic_distance(to_top) *
+            scenic_distance(to_bottom))
+
+
 def part_b(input_data: str) -> int:
     """Given the puzzle input data, return the solution for part B."""
 
-    return "Solution not implemented"
+    tree_heights = parse_data(input_data)
+    rows, cols = tree_heights.shape
+
+    s_scores = [scenic_score(i, j, tree_heights)
+                for i in range(rows)
+                for j in range(cols)]
+
+
+    return max(s_scores)
 
 
 if __name__ == '__main__':
