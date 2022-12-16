@@ -3,9 +3,13 @@
 import day08
 
 # Test data given as a multiline string.
-sample_input_data = """Sample data not entered"""
+sample_input_data = """30373
+25512
+65332
+33549
+35390"""
 
-sample_solution_a = "Sample solution not entered"
+sample_solution_a = 21
 
 sample_solution_b = "Sample solution not entered"
 
