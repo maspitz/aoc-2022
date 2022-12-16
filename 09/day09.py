@@ -29,8 +29,8 @@ def sign(n: int) -> int:
 
 
 @dataclass
-class Bridge:
-    """Models the bridge configuration."""
+class Rope:
+    """Models the rope configuration."""
 
     head: Point = Point(0, 0)
     tail: Point = Point(0, 0)
@@ -48,7 +48,7 @@ class Bridge:
 def part_a(input_data: str) -> int:
     """Given the puzzle input data, return the solution for part A."""
 
-    b = Bridge()
+    b = Rope()
     tail_history = set()
 
     for line in input_data.split('\n'):
