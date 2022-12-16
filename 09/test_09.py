@@ -12,9 +12,19 @@ D 1
 L 5
 R 2"""
 
+sample_input_data_larger = """R 5
+U 8
+L 8
+D 3
+R 17
+D 10
+L 25
+U 20"""
+
 sample_solution_a = 13
 
-sample_solution_b = "Sample solution not entered"
+sample_solution_b = 1
+sample_solution_b_larger = 36
 
 
 def test_part_a():
@@ -25,3 +35,4 @@ def test_part_a():
 def test_part_b():
     """Test the solution on sample data for part B."""
     assert day09.part_b(sample_input_data) == sample_solution_b
+    assert day09.part_b(sample_input_data_larger) == sample_solution_b_larger
