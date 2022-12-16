@@ -71,7 +71,16 @@ def part_a(input_data: str) -> int:
 def part_b(input_data: str) -> str:
     """Given the puzzle input data, return the solution for part B."""
 
-    return "Solution not implemented"
+    r = Rope(10)
+    tail_history = set()
+
+    for line in input_data.split('\n'):
+        heading, amount = line.split(' ')
+        for _ in range(int(amount)):
+            r.move_rope(heading)
+            tail_history.add(r.knots[-1])
+
+    return len(tail_history)
 
 
 if __name__ == '__main__':
