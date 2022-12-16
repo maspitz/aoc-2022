@@ -2,7 +2,7 @@
 
 from aocd.models import Puzzle
 from collections import namedtuple
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 Point = namedtuple("Point", "x y")
 
@@ -32,31 +32,38 @@ def sign(n: int) -> int:
 class Rope:
     """Models the rope configuration."""
 
-    head: Point = Point(0, 0)
-    tail: Point = Point(0, 0)
+    size: int
+    knots: list = field(init=False)
 
-    def move_tail(self):
-        """Moves the tail according to the head's position."""
+    def __post_init__(self):
+        self.knots = [Point(0,0) for _ in range(self.size)]
 
-        offset = sub_points(self.head, self.tail)
-
+    def move_knot(self, n: int):
+        """Moves knot n according to the position of knot (n-1)."""
+        offset = sub_points(self.knots[n-1], self.knots[n])
         if abs(offset.x) >= 2 or abs(offset.y) >= 2:
-            self.tail = add_points(self.tail,
-                                   Point(sign(offset.x), sign(offset.y)))
+            self.knots[n] = add_points(self.knots[n],
+                                       Point(sign(offset.x), sign(offset.y)))
+
+    def move_rope(self, heading: str):
+        """Moves the rope's knots according to the given heading."""
+
+        self.knots[0] = add_points(self.knots[0], DIRECTION[heading])
+        for idx in range(1, len(self.knots)):
+            self.move_knot(idx)
 
 
 def part_a(input_data: str) -> int:
     """Given the puzzle input data, return the solution for part A."""
 
-    b = Rope()
+    r = Rope(2)
     tail_history = set()
 
     for line in input_data.split('\n'):
         heading, amount = line.split(' ')
         for _ in range(int(amount)):
-            b.head = add_points(b.head, DIRECTION[heading])
-            b.move_tail()
-            tail_history.add(b.tail)
+            r.move_rope(heading)
+            tail_history.add(r.knots[-1])
 
     return len(tail_history)
 
