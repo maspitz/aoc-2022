@@ -154,6 +154,12 @@ sample_solution_a = 13140
 
 sample_solution_b = "Sample solution not entered"
 
+def test_register_history():
+    """Test register_history's evaluation of the sample three-line program."""
+
+    assert day10.register_history("""noop
+    addx 3
+    addx -5""") == [1, 1, 1, 4, 4, -1]
 
 def test_part_a():
     """Test the solution on sample data for part A."""
