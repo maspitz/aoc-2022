@@ -152,7 +152,12 @@ noop"""
 
 sample_solution_a = 13140
 
-sample_solution_b = "Sample solution not entered"
+sample_solution_b = """##..##..##..##..##..##..##..##..##..##..
+###...###...###...###...###...###...###.
+####....####....####....####....####....
+#####.....#####.....#####.....#####.....
+######......######......######......####
+#######.......#######.......#######....."""
 
 def test_register_history():
     """Test register_history's evaluation of the sample three-line program."""
