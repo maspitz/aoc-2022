@@ -3,7 +3,7 @@
 from aocd.models import Puzzle
 
 
-def register_history(input_data: str) -> list:
+def register_history(input_program: str) -> list:
     """Given puzzle input, return the register history as a zero-indexed list.
 
     The list is indexed by cycle, 0 being the first, so that the input data:
@@ -16,7 +16,7 @@ def register_history(input_data: str) -> list:
 
     results = []
     register = 1
-    for instruction in input_data.split('\n'):
+    for instruction in input_program.split('\n'):
         if instruction == 'noop':
             results.append(register)
         else:
@@ -38,10 +38,26 @@ def part_a(input_data: str) -> int:
     return sum([x * reg[x - 1] for x in [20, 60, 100, 140, 180, 220]])
 
 
+def render_image(input_program: str) -> str:
+    """Render as a string the CRT output produced by the input program."""
+
+    output = ""
+    reg_hist = register_history(input_program)
+    for cycle, reg in enumerate(reg_hist):
+        pixel = cycle % 40
+        if reg - 1 <= pixel <= reg + 1:
+            output += "#"
+        else:
+            output += '.'
+    num_lines = len(output) // 40
+    image = "\n".join([output[i:i+40] for i in range(0, num_lines * 40, 40)])
+    return image
+
+
 def part_b(input_data: str) -> int:
     """Given the puzzle input data, return the solution for part B."""
 
-    return "Solution not implemented"
+    return render_image(input_data)
 
 
 if __name__ == '__main__':
