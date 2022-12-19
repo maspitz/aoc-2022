@@ -3,6 +3,33 @@
 from aocd.models import Puzzle
 
 
+def register_history(input_data: str) -> list:
+    """Given puzzle input data, return the register history as a list.
+
+    The list is indexed by cycle, 0 being the first, so that the input data:
+      noop
+      addx 3
+      addx -5
+    will return:
+    [1, 1, 1, 4, 4, -1]
+    """
+
+    results = []
+    register = 1
+    for instruction in input_data.split('\n'):
+        if instruction == 'noop':
+            results.append(register)
+        else:
+            cmd, arg = instruction.split()
+            if cmd != 'addx':
+                raise ValueError(f"Unknown instruction: {instruction}")
+            results.append(register)
+            results.append(register)
+            register += int(arg)
+    results.append(register)
+    return results
+
+
 def part_a(input_data: str) -> int:
     """Given the puzzle input data, return the solution for part A."""
 
