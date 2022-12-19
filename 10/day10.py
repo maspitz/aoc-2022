@@ -4,7 +4,7 @@ from aocd.models import Puzzle
 
 
 def register_history(input_data: str) -> list:
-    """Given puzzle input data, return the register history as a list.
+    """Given puzzle input, return the register history as a zero-indexed list.
 
     The list is indexed by cycle, 0 being the first, so that the input data:
       noop
@@ -33,7 +33,9 @@ def register_history(input_data: str) -> list:
 def part_a(input_data: str) -> int:
     """Given the puzzle input data, return the solution for part A."""
 
-    return "Solution not implemented"
+    reg = register_history(input_data)
+
+    return sum([x * reg[x - 1] for x in [20, 60, 100, 140, 180, 220]])
 
 
 def part_b(input_data: str) -> int:
